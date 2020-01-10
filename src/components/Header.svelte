@@ -4,14 +4,22 @@
   import { slide } from 'svelte/transition'
   export let title;
 
-  const types = ['is-primary', 'is-success', 'is-danger', 'is-warning', 'is-info', 'is-link']
+  const types = ['is-primary', 'is-success', 'is-danger', 'is-warning', 'is-info', 'is-link', 'is-dark'];
   let type = 'is-primary';
+  let lastType = '';
 
   async function update() {
-    type = '';
+    lastType = type; type = '';
     setTimeout(() => {
-      type = types[Math.floor(Math.random() * types.length)];
-    }, 1000)
+      let key = Math.floor(Math.random() * types.length);
+      if (types[key] === lastType){
+        key += 1;
+        if (key === -1 || key >= types.length){
+          key = 3;
+        }
+      }
+      type = types[key];
+      }, 1000)
   }
 </script>
 
@@ -25,6 +33,7 @@
       </div>
     </section>
   {/if}
+
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -36,33 +45,16 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">
-          Home
-        </a>
-
-        <a class="navbar-item">
-          Documentation
-        </a>
-
+        <a class="navbar-item"> Home </a>
+        <a class="navbar-item"> Articles </a>
+        <a class="navbar-item"> Chatroom </a>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More
-          </a>
-
+          <a class="navbar-link"> More </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item">
-              About
-            </a>
-            <a class="navbar-item">
-              Jobs
-            </a>
-            <a class="navbar-item">
-              Contact
-            </a>
+            <a class="navbar-item"> Gastronomy </a>
+            <a class="navbar-item"> About Me </a>
             <hr class="navbar-divider">
-            <a class="navbar-item">
-              Report an issue
-            </a>
+            <a class="navbar-item"> Consulting </a>
           </div>
         </div>
       </div>
@@ -70,15 +62,7 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light">
-              Log in
-            </a>
-            <a class="button is-primary" on:click={update}>
-              Update Hero
-            </a>
+            {#if type}<a class="button {type}" on:click={update}> Change Colors </a>{/if}
           </div>
         </div>
       </div>
@@ -87,6 +71,7 @@
 </main>
 
 <style>
+  @import url('https://fonts.googleapis.com/css?family=Poiret+One&display=swap');
   main {
     text-align: center;
     padding: 1em;
@@ -105,6 +90,9 @@
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
+  }
+  .title{
+    font-family: 'Poiret One', cursive;
   }
 
 </style>
