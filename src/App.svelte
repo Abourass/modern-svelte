@@ -1,6 +1,11 @@
 <script>
+  import {onMount} from 'svelte';
   import Header from './components/Header.svelte';
   import ArticleList from './components/articles/ArticleList.svelte';
+
+  const apiURL = 'https://the-modern-farm.herokuapp.com/';
+  let data = [];
+
 
   export let title;
 </script>

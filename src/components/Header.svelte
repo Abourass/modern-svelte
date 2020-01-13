@@ -14,13 +14,25 @@
       let key = Math.floor(Math.random() * types.length);
       if (types[key] === lastType){
         key += 1;
-        if (key === -1 || key >= types.length){
-          key = 3;
-        }
+        if (key === -1 || key >= types.length){ key = 3; }
       }
       type = types[key];
       }, 1000)
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0); // Get all "navbar-burger" elements
+    if ($navbarBurgers.length > 0) { // Check if there are any navbar burgers
+      $navbarBurgers.forEach( el => { // Add a click event on each of them
+        el.addEventListener('click', () => {
+          const target = el.dataset.target; // Get the target from the "data-target" attribute
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active'); // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          $target.classList.toggle('is-active');
+        });
+      });
+    }
+  });
 </script>
 
 <main>
@@ -43,11 +55,11 @@
       </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item"> Home </a>
         <a class="navbar-item"> Articles </a>
-        <a class="navbar-item"> Chatroom </a>
+        <a class="navbar-item" href="https://discord.gg/Ex3EW8P"> Chatroom </a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link"> More </a>
           <div class="navbar-dropdown">
@@ -74,8 +86,6 @@
   @import url('https://fonts.googleapis.com/css?family=Poiret+One&display=swap');
   main {
     text-align: center;
-    padding: 1em;
-    max-width: 240px;
     margin: 0 auto;
   }
 
@@ -85,14 +95,9 @@
     }
   }
 
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
+  .title{
+    font-family: 'Poiret One', cursive;
     font-size: 4em;
     font-weight: 100;
   }
-  .title{
-    font-family: 'Poiret One', cursive;
-  }
-
 </style>
