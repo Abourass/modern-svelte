@@ -3,18 +3,34 @@
   import ArticleList from './components/articles/ArticleList.svelte';
 
   const apiURL = 'https://the-modern-farm.herokuapp.com/article/all';
-  const types = ['is-primary', 'is-success', 'is-danger', 'is-warning', 'is-info', 'is-link', 'is-dark'];
-  let data = [], polarity = 'dark', type = 'is-primary', lastType = '';
+  let polarity = 'light', polarityBtn = 'Night Mode', nextPolarity = 'grey';
+  let data = [], type = 'is-dark';
 
-  const switchPolarity = () => polarity === 'dark' ? polarity = 'light' : polarity = 'dark';
-  const switchType = async() => {
-    lastType = type; type = '';
-    setTimeout(() => {
-      let key = Math.floor(Math.random() * types.length);
-      if (types[key] === lastType){key += 1; if (key === -1 || key >= types.length){ key = 3; }}
-      type = types[key];
-    }, 1000)
+  const switchPolarity = () => {
+    switch(polarity){
+      case 'light':
+        polarity = nextPolarity;
+        nextPolarity = 'dark';
+        polarityBtn = '90\'s Mode';
+        break;
+      case 'grey':
+        polarity = nextPolarity;
+        nextPolarity = 'light';
+        polarityBtn = 'Day Mode';
+        break;
+      default:
+        polarity = nextPolarity;
+        nextPolarity = 'grey';
+        polarityBtn = 'Night Mode';
+    }
   };
+  const switchToPrimary = async() => {type = ''; setTimeout(() => {type = 'is-primary'}, 1000); };
+  const switchToSuccess = async() => {type = ''; setTimeout(() => {type = 'is-success'}, 1000); };
+  const switchToDanger = async() => {type = ''; setTimeout(() => {type = 'is-danger'}, 1000); };
+  const switchToWarning = async() => {type = ''; setTimeout(() => {type = 'is-warning'}, 1000); };
+  const switchToInfo = async() => {type = ''; setTimeout(() => {type = 'is-info'}, 1000); };
+  const switchToLink = async() => {type = ''; setTimeout(() => {type = 'is-link'}, 1000); };
+  const switchToDark = async() => {type = ''; setTimeout(() => {type = 'is-dark'}, 1000); };
 
   document.addEventListener('DOMContentLoaded', () => {
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0); // Get all "navbar-burger" elements
@@ -35,7 +51,7 @@
 <main>
   <Header title="{title}" type="{type}"/>
   <div class="{polarity}-wrapper">
-    <nav class="navbar is-{polarity}" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-{polarity === 'light' ? 'light' : 'dark'}" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="modernNav">
           <span aria-hidden="true"></span>
@@ -63,14 +79,22 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              {#if type}<a class="button {type}" on:click={switchType}> Change Colors </a>{/if}
-              {#if polarity}<a class="button" on:click={switchPolarity}>{polarity === 'dark' ? 'Day Mode' : 'Night Mode'}</a>{/if}
+              {#if type}
+                <a class="button is-primary" on:click={switchToPrimary}>&nbsp;</a>
+                <a class="button is-success" on:click={switchToSuccess}>&nbsp;</a>
+                <a class="button is-danger" on:click={switchToDanger}>&nbsp;</a>
+                <a class="button is-warning" on:click={switchToWarning}>&nbsp;</a>
+                <a class="button is-info" on:click={switchToInfo}>&nbsp;</a>
+                <a class="button is-link" on:click={switchToLink}>&nbsp;</a>
+                <a class="button is-dark" on:click={switchToDark}>&nbsp;</a>
+              {/if}
+              {#if polarity}<a class="button {nextPolarity}-wrapper" on:click={switchPolarity}>{polarityBtn}</a>{/if}
             </div>
           </div>
         </div>
       </div>
     </nav>
-    <ArticleList fetchURL="{apiURL}" />
+    <ArticleList fetchURL="{apiURL}" polarity="{polarity}" />
   </div>
 </main>
 
@@ -84,8 +108,11 @@
     color: whitesmoke !important;
   }
 
-  .dark-wrapper p {
-    color: whitesmoke !important;
+  .grey-wrapper {
+    background: #333333;
+    background: -webkit-linear-gradient(to right, #333333, #222222) !important;
+    background: linear-gradient(to right, #333333, #222222) !important;
+    color: whitesmoke;
   }
 
   .light-wrapper {

@@ -35,4 +35,9 @@
     font-size: 4em;
     font-weight: 100;
   }
+
+  .hero-body {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
 </style>
