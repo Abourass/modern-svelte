@@ -65,17 +65,6 @@ button:focus {
 	border-color: #666;
 }
 
-.image img {
-  width: auto !important;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: .2rem;
-  box-shadow: 10px 10px 5px #ccc;
-  -moz-box-shadow: 10px 10px 5px #ccc;
-  -webkit-box-shadow: 10px 10px 5px #ccc;
-  -khtml-box-shadow: 10px 10px 5px #ccc;
-}
-
 article {
   padding-left: 10vw;
   padding-right: 10vw;
@@ -83,4 +72,50 @@ article {
 
 p {
   margin-bottom: 1rem !important;
+}
+
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: 5px solid #ccc;
+}
+
+blockquote > p {
+  padding-left: .6rem;
+}
+
+.image img {
+  width: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: .2rem;
+}
+
+.title.is-dark {
+  color: whitesmoke;
+}
+
+#contentArea.content-is-dark blockquote {
+  border-left: 5px solid #2dcc0b;
+}
+
+.title.is-grey {
+  color: whitesmoke;
+}
+#contentArea.content-is-grey figure.image img {
+  box-shadow: 10px 10px 5px #1b1a1a;
+  -moz-box-shadow: 10px 10px 5px #1b1a1a;
+  -webkit-box-shadow: 10px 10px 5px #1b1a1a;
+  -khtml-box-shadow: 10px 10px 5px #1b1a1a;
+}
+
+.title.is-light {
+  color: #333333;
+}
+#contentArea.content-is-light figure.image img {
+  box-shadow: 10px 10px 5px #ccc;
+  -moz-box-shadow: 10px 10px 5px #ccc;
+  -webkit-box-shadow: 10px 10px 5px #ccc;
+  -khtml-box-shadow: 10px 10px 5px #ccc;
 }

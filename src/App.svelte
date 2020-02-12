@@ -88,7 +88,7 @@
                 <a class="button is-link" on:click={switchToLink}>&nbsp;</a>
                 <a class="button is-dark" on:click={switchToDark}>&nbsp;</a>
               {/if}
-              {#if polarity}<a class="button {nextPolarity}-wrapper" on:click={switchPolarity}>{polarityBtn}</a>{/if}
+              {#if polarity}<a id="{polarity}-switch-btn" class="button {nextPolarity}-wrapper" on:click={switchPolarity}>{polarityBtn}</a>{/if}
             </div>
           </div>
         </div>
@@ -105,18 +105,28 @@
     background: #7f00ff;
     background: -webkit-linear-gradient(to right, #7F00FF, #3f00fc) !important;
     background: linear-gradient(to right, #7F00FF, #3f00fc) !important;
-    color: whitesmoke !important;
+  }
+
+  #dark-switch-btn{
+    color: #333333 !important;
   }
 
   .grey-wrapper {
     background: #333333;
     background: -webkit-linear-gradient(to right, #333333, #222222) !important;
     background: linear-gradient(to right, #333333, #222222) !important;
-    color: whitesmoke;
+  }
+
+  #grey-switch-btn {
+    color: whitesmoke !important;
   }
 
   .light-wrapper {
     background: whitesmoke;
     color: black;
+  }
+
+  #light-switch-btn {
+    color: whitesmoke !important;
   }
 </style>
